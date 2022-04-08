@@ -1,0 +1,119 @@
+name: nebula-lighthouse-service
+version: v1.5.2
+
+summary: A scalable overlay networking tool.
+
+description: |
+  Nebula is a scalable overlay networking tool with a focus on performance, simplicity and security.
+  It lets you seamlessly connect computers anywhere in the world. Nebula is portable, and runs on Linux, OSX, and Windows.
+  (Also: keep this quiet, but we have an early prototype running on iOS).
+  It can be used to connect a small number of computers, but is also able to connect tens of thousands of computers.
+
+  Nebula incorporates a number of existing concepts like encryption, security groups, certificates,
+  and tunneling, and each of those individual pieces existed before Nebula in various forms.
+  What makes Nebula different to existing offerings is that it brings all of these ideas together,
+  resulting in a sum that is greater than its individual parts.
+
+  More info on Nebula https://github.com/slackhq/nebula
+
+  For issues and other matters on this snap https://github.com/jwallden/nebula-snap
+
+grade: stable
+confinement: strict
+
+base: core20
+
+parts:
+  nebula:
+    plugin: go
+    source: https://github.com/slackhq/nebula.git
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
+    source-type: git
+    build-packages:
+      - gcc
+
+  webservice:
+    plugin: python
+    source: .
+
+layout:
+  /etc/nebula:
+    bind: $SNAP_COMMON
+
+apps:
+  webservice:
+    command: bin/webservice
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+  lighthouse-0:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-0.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-1:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-1.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-2:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-2.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-3:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-3.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-4:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-4.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-5:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-5.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-6:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-6.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-7:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-7.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-8:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-8.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+
+  lighthouse-9:
+    command: bin/nebula -config $SNAP_COMMON/config/lighthouse-9.yaml
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network

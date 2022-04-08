@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PYTHONPATH=$SNAP/lib/python3.8/site-packages
+
+$SNAP/bin/configure_hook.py

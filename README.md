@@ -4,7 +4,7 @@
 This server is a public [Nebula VPN](https://www.defined.net/nebula/) Lighthouse Service. You can use it in case you don’t have a publicly accessible server to run your own Nebula Lighthouse.
 
 ## List of Public Nebula Lighthouse Services
-See [the project's server list](https://htmlpreview.github.io/?https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html) 
+<iframe src="https://htmlpreview.github.io/?https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html"></iframe>
 
 ## What is a Nebula Lighthouse?
 

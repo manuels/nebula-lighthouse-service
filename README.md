@@ -4,7 +4,7 @@
 This server is a public [Nebula VPN](https://www.defined.net/nebula/) Lighthouse Service. You can use it in case you don’t have a publicly accessible server to run your own Nebula Lighthouse.
 
 ## List of Public Nebula Lighthouse Services
-<iframe src="https://htmlpreview.github.io/?https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html"></iframe>
+See [the project's server list](https://htmlpreview.github.io/?https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html) to get a list of public servers.
 
 ## What is a Nebula Lighthouse?
 
@@ -22,11 +22,11 @@ If you follow this tutorial, you will create three files:
  - `lighthouse1.crt`
  - `lighthouse1.key`
 
-Now send a POST request with these three files as parameters to this server (also see [API documentation](/docs/)).
+Now send a POST request with these three files as parameters to a server (choose [one of the servers of this list](https://htmlpreview.github.io/?https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html)).
 Here is an example of how to do it with curl:
 
 ```
-$ curl -X POST "http://${this_host}/lighthouse/" -F ca_crt=@./ca.crt -F host_crt=@./lighthouse1.crt -F host_key=@./lighthouse1.key
+$ curl -X POST "http://${public_lighthouse}/lighthouse/" -F ca_crt=@./ca.crt -F host_crt=@./lighthouse1.crt -F host_key=@./lighthouse1.key
 {'port': 49153}
 #        ^^^^^ this port will differ for your request
 ```
@@ -36,14 +36,14 @@ Now add this information to your clients’ Nebula configuration file using a se
 
 ```
 static_host_map:
-    "192.168.100.1": ["${this_host}:49153"]
+    "192.168.100.1": ["${public_lighthouse}:49153"]
 ```
 
 The server returns a JSON-encoded response that contains a port that you can now use as your VPN's Nebula lighthouse.
 You can check the status of this service using
 
 ```
-$ curl -X GET "http://${this_host}/lighthouse/" -F ca_crt=@./ca.crt -F host_crt=@./lighthouse1.crt -F host_key=@./lighthouse1.key
+$ curl -X GET "http://${public_lighthouse}/lighthouse/" -F ca_crt=@./ca.crt -F host_crt=@./lighthouse1.crt -F host_key=@./lighthouse1.key
 {'running': true, 'port': 49153}
 ```
 

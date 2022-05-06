@@ -21,7 +21,7 @@
 </ul>
 <p class="has-line-data" data-line-start="24" data-line-end="26">Now send a POST request with these three files as parameters to this server (also see <a href="/docs/">API documentation</a>).<br>
 Here is an example of how to do it with curl:</p>
-<pre><code class="has-line-data" data-line-start="28" data-line-end="32">$ curl -X POST &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a2a09ea2b3b5fc81ef">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed85829e99b28e9f99d0adc3">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e880879b9cb7838d91d5a8c6">[email&#160;protected]</a>/lighthouse1.key
+<pre><code class="has-line-data" data-line-start="28" data-line-end="32">$ curl -X POST &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5132300e3223256c117f">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41292e32351e2233357c016f">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e16110d0a21151b07433e50">[email&#160;protected]</a>/lighthouse1.key
 {'port': 49153}
 #        ^^^^^ this port will differ for your request
 </code></pre>
@@ -32,7 +32,7 @@ Now add this information to your clients’ Nebula configuration file using a se
 </code></pre>
 <p class="has-line-data" data-line-start="41" data-line-end="43">The server returns a JSON-encoded response that contains a port that you can now use as your VPN’s Nebula lighthouse.<br>
 You can check the status of this service using</p>
-<pre><code class="has-line-data" data-line-start="45" data-line-end="48">$ curl -X GET &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="197a78467a6b6d245937">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af2f5e9eec5f9e8eea7dab4">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="224a4d51567d49475b1f620c">[email&#160;protected]</a>/lighthouse1.key
+<pre><code class="has-line-data" data-line-start="45" data-line-end="48">$ curl -X GET &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6d5d7e9d5c4c28bf698">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c04031f18330f1e18512c42">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c44435f5873474955116c02">[email&#160;protected]</a>/lighthouse1.key
 {'running': true, 'port': 49153}
 </code></pre>
 <blockquote>
@@ -68,5 +68,15 @@ You can check the status of this service using</p>
 <p class="has-line-data" data-line-start="89" data-line-end="90">Set available port range for lighthouses (according to private port range in <a href="https://datatracker.ietf.org/doc/html/rfc6335#section-6">RFC 6335</a>):</p>
 <pre><code class="has-line-data" data-line-start="91" data-line-end="94">$ sudo snap set nebula-lighthouse-service min-port=49152
 $ sudo snap set nebula-lighthouse-service max-port=65535
+</code></pre>
+<h2 class="code-line" data-line-start=95 data-line-end=96><a id="Debugging_the_Service_95"></a>Debugging the Service</h2>
+<p class="has-line-data" data-line-start="96" data-line-end="97">When you run a Nebula Lighthouse service, there is systemd service with the name <code>snap.nebula-lighthouse-service.webservice</code> running and for each served lighthouse a service with the name <code>snap.nebula-lighthouse-service.lighthouse-$i</code> (where <code>i</code> is an increasing number starting with <code>0</code>).</p>
+<p class="has-line-data" data-line-start="98" data-line-end="99">You can check if the services are running using</p>
+<pre><code class="has-line-data" data-line-start="100" data-line-end="103">$ sudo systemctl status snap.nebula-lighthouse-service.webservice
+$ sudo systemctl status snap.nebula-lighthouse-service.lighthouse-0
+</code></pre>
+<p class="has-line-data" data-line-start="103" data-line-end="104">or check the complete logs using</p>
+<pre><code class="has-line-data" data-line-start="105" data-line-end="108">sudo journalctl -u snap.nebula-lighthouse-service.webservice
+sudo journalctl -u snap.nebula-lighthouse-service.lighthouse-0
 </code></pre>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>

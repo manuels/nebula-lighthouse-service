@@ -93,3 +93,16 @@ $ sudo snap set nebula-lighthouse-service min-port=49152
 $ sudo snap set nebula-lighthouse-service max-port=65535
 ```
 
+## Debugging the Service
+When you run a Nebula Lighthouse service, there is systemd service with the name `snap.nebula-lighthouse-service.webservice` running and for each served lighthouse a service with the name `snap.nebula-lighthouse-service.lighthouse-$i` (where `i` is an increasing number starting with `0`).
+
+You can check if the services are running using
+```
+$ sudo systemctl status snap.nebula-lighthouse-service.webservice
+$ sudo systemctl status snap.nebula-lighthouse-service.lighthouse-0
+```
+or check the complete logs using
+```
+sudo journalctl -u snap.nebula-lighthouse-service.webservice
+sudo journalctl -u snap.nebula-lighthouse-service.lighthouse-0
+```

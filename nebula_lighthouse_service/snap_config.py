@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-import asyncio
 import json
-import re
 import subprocess
-from typing import Optional
 
 
 def get_config(name, default):
@@ -38,63 +35,3 @@ def set_ports(min_port, max_port):
                            f'min-port={int(min_port)}',
                            f'max-port={int(max_port)}'
                            ])
-
-
-def parse_lighthouse_name(name: str) -> Optional[int]:
-    match = re.match('^lighthouse-([0-9]+)$', name)
-    if not match:
-        return None
-
-    try:
-        number = int(match.group(1))
-    except ValueError:
-        return None
-
-    return number
-
-
-def get_lighthouses() -> dict[int, dict[str]]:
-    output = subprocess.check_output('snapctl get -d lighthouses'.split())
-    config = json.loads(output)
-    config = config.get('lighthouses', {})
-
-    lighthouse_configs = {parse_lighthouse_name(lighthouse_name): cfg
-                          for lighthouse_name, cfg in config.items()}
-
-    lighthouse_configs[None] = None
-    del lighthouse_configs[None]
-
-    lighthouse_configs = dict(sorted(lighthouse_configs.items()))
-
-    return lighthouse_configs
-
-
-def is_same_config(cfg: dict, ca_crt: str, host_crt: str, host_key: str) -> bool:
-    return (cfg.get('ca', '') == ca_crt
-            and cfg.get('cert', '') == host_crt
-            and cfg.get('key', '') == host_key)
-
-
-async def add_lighthouse(ca_crt: str, host_crt: str, host_key: str) -> int:
-    configs = get_lighthouses()
-
-    existing = (lighthouse_id for lighthouse_id, cfg in configs.items()
-                if is_same_config(cfg, ca_crt, host_crt, host_key))
-    lighthouse_id = next(existing, None)
-    if lighthouse_id is not None:
-        return lighthouse_id
-
-    lighthouse_id_lists = configs.keys()
-    lighthouse_id = max(lighthouse_id_lists, default=-1) + 1
-
-    cfg_prefix = f'lighthouses.lighthouse-{lighthouse_id}'
-
-    cmd = ['snapctl', 'set', 'nebula-lighthouse-service',
-           f'{cfg_prefix}.ca={ca_crt}',
-           f'{cfg_prefix}.cert={host_crt}',
-           f'{cfg_prefix}.key={host_key}',
-           ]
-    proc = await asyncio.create_subprocess_exec(*cmd)
-    await proc.wait()
-
-    return lighthouse_id

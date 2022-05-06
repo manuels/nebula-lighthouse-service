@@ -93,6 +93,8 @@ $ sudo snap set nebula-lighthouse-service min-port=49152
 $ sudo snap set nebula-lighthouse-service max-port=65535
 ```
 
+You can add your server to the [list of public Nebula lighthouse services](https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html) on Github.
+
 ## Debugging the Service
 When you run a Nebula Lighthouse service, there is systemd service with the name `snap.nebula-lighthouse-service.webservice` running and for each served lighthouse a service with the name `snap.nebula-lighthouse-service.lighthouse-$i` (where `i` is an increasing number starting with `0`).
 

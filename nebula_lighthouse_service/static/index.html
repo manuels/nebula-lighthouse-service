@@ -3,9 +3,7 @@
 <h2 class="code-line" data-line-start=2 data-line-end=3><a id="Introduction_2"></a>Introduction</h2>
 <p class="has-line-data" data-line-start="3" data-line-end="4">This server is a public <a href="https://www.defined.net/nebula/">Nebula VPN</a> Lighthouse Service. You can use it in case you don’t have a publicly accessible server to run your own Nebula Lighthouse.</p>
 <h2 class="code-line" data-line-start=5 data-line-end=6><a id="List_of_Public_Nebula_Lighthouse_Services_5"></a>List of Public Nebula Lighthouse Services</h2>
-<ul>
-<li class="has-line-data" data-line-start="6" data-line-end="8"><a href="http://46.38.232.184:9999/">http://46.38.232.184:9999/</a></li>
-</ul>
+<p class="has-line-data" data-line-start="6" data-line-end="7">See <a href="https://htmlpreview.github.io/?https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html">the project’s server list</a></p>
 <h2 class="code-line" data-line-start=8 data-line-end=9><a id="What_is_a_Nebula_Lighthouse_8"></a>What is a Nebula Lighthouse?</h2>
 <p class="has-line-data" data-line-start="10" data-line-end="11">In Nebula, a lighthouse is a Nebula host that is responsible for keeping track of all the other Nebula hosts, and helping them find each other within a Nebula network.</p>
 <h2 class="code-line" data-line-start=12 data-line-end=13><a id="Quickstart_12"></a>Quickstart</h2>
@@ -21,7 +19,7 @@
 </ul>
 <p class="has-line-data" data-line-start="24" data-line-end="26">Now send a POST request with these three files as parameters to this server (also see <a href="/docs/">API documentation</a>).<br>
 Here is an example of how to do it with curl:</p>
-<pre><code class="has-line-data" data-line-start="28" data-line-end="32">$ curl -X POST &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5132300e3223256c117f">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41292e32351e2233357c016f">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e16110d0a21151b07433e50">[email&#160;protected]</a>/lighthouse1.key
+<pre><code class="has-line-data" data-line-start="28" data-line-end="32">$ curl -X POST &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c6f6d536f7e78314c22">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8de5e2fef9d2eefff9b0cda3">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="650d0a16113a0e001c58254b">[email&#160;protected]</a>/lighthouse1.key
 {'port': 49153}
 #        ^^^^^ this port will differ for your request
 </code></pre>
@@ -32,7 +30,7 @@ Now add this information to your clients’ Nebula configuration file using a se
 </code></pre>
 <p class="has-line-data" data-line-start="41" data-line-end="43">The server returns a JSON-encoded response that contains a port that you can now use as your VPN’s Nebula lighthouse.<br>
 You can check the status of this service using</p>
-<pre><code class="has-line-data" data-line-start="45" data-line-end="48">$ curl -X GET &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6d5d7e9d5c4c28bf698">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c04031f18330f1e18512c42">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c44435f5873474955116c02">[email&#160;protected]</a>/lighthouse1.key
+<pre><code class="has-line-data" data-line-start="45" data-line-end="48">$ curl -X GET &quot;http://${this_host}/lighthouse/&quot; -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49795ab978680c9b4da">[email&#160;protected]</a>/ca.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="30585f43446f5342440d701e">[email&#160;protected]</a>/lighthouse1.crt -F <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8b0b7abac87b3bda1e598f6">[email&#160;protected]</a>/lighthouse1.key
 {'running': true, 'port': 49153}
 </code></pre>
 <blockquote>

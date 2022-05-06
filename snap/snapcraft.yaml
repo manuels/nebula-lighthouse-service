@@ -2,6 +2,7 @@ name: nebula-lighthouse-service
 version: v1.5.2
 
 summary: A scalable overlay networking tool.
+license: AGPL-3.0-or-later
 
 description: |
   This snap offers a public Nebula VPN Lighthouse Service. 

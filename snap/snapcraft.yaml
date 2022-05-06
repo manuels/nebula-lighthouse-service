@@ -7,7 +7,6 @@ description: |
   This snap offers a public Nebula VPN Lighthouse Service. 
   You run it to offer people who do not have a publicly accessible server a way to run their own Nebula Lighthouse.
  
-  
   Nebula is a scalable overlay networking tool with a focus on performance, simplicity and security.
   It lets you seamlessly connect computers anywhere in the world. Nebula is portable, and runs on Linux, OSX, and Windows.
   (Also: keep this quiet, but we have an early prototype running on iOS).
@@ -20,7 +19,7 @@ description: |
 
   More info on Nebula https://github.com/slackhq/nebula
 
-  For issues and other matters on this snap https://github.com/jwallden/nebula-snap
+  For issues and other matters on this snap https://github.com/manuels/nebula-lighthouse-service
 
 grade: stable
 confinement: strict

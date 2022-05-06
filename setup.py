@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='nebula_lighthouse_service',
-    version='1.0.0',
+    version='0.0.1',
     url='https://github.com/mypackage.git',
     author='Author Name',
     author_email='author@gmail.com',

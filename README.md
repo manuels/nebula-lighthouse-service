@@ -28,7 +28,7 @@ Here is an example of how to do it with curl:
 ```
 $ curl -X POST "http://${public_lighthouse}/lighthouse/" -F ca_crt=@./ca.crt -F host_crt=@./lighthouse1.crt -F host_key=@./lighthouse1.key
 {'port': 49153}
-#        ^^^^^ this port will differ for your request
+#        ^^^^^ this port will differ for your request!
 ```
 
 (It is not harmful to run this command several times - it is idempotent.)

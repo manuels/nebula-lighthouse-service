@@ -1,5 +1,5 @@
 name: nebula-lighthouse-service
-version: v1.6.0
+version: v1.6.1
 
 summary: A scalable overlay networking tool.
 license: AGPL-3.0-or-later

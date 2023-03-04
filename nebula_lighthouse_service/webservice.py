@@ -147,7 +147,7 @@ async def lighthouse_status(ca_crt: bytes = File(...),
                             host_crt=host_crt.decode('ascii'),
                             host_key=host_key.decode('ascii'))
     daemon = nebula_lighthouses.get(lighthouse)
-    is_running = lighthouse is not None
+    is_running = daemon is not None
     response = dict(running=is_running)
     if is_running:
         response['port'] = daemon.port

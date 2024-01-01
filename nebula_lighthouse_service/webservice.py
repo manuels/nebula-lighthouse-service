@@ -96,7 +96,7 @@ async def index():
 
 async def start_nebula(lighthouse: Lighthouse) -> Tuple[int, asyncio.subprocess.Process]:
     min_port, max_port = snap_config.get_ports()
-    port = min_port + len(nebula_lighthouses)
+    port = min_port + len(list(nebula_config.get_existing_configs()))
     if port > max_port:
         raise ValueError('Too many nebula lighthouse services already running')
 

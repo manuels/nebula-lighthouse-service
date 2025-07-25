@@ -6,7 +6,7 @@ import logging
 import re
 from typing import Tuple
 
-import pkg_resources
+import importlib.resources
 from pydantic import BaseModel, validator
 import uvicorn as uvicorn
 from fastapi import FastAPI, File
@@ -91,7 +91,7 @@ async def shutdown():
 
 @app.get("/")
 async def index():
-    return HTMLResponse(pkg_resources.resource_string(__name__, 'static/index.html'))
+    return HTMLResponse(importlib.resources.files(__name__).joinpath('static/index.html').read_bytes())
 
 
 async def start_nebula(lighthouse: Lighthouse) -> Tuple[int, asyncio.subprocess.Process]:

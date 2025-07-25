@@ -1,5 +1,5 @@
 #!/bin/sh
 
-export PYTHONPATH=$SNAP/lib/python3.8/site-packages
+export PYTHONPATH=$SNAP/lib/python3.12/site-packages
 
 $SNAP/bin/configure_hook.py

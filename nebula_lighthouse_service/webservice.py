@@ -13,7 +13,7 @@ from fastapi import FastAPI, File
 from starlette.responses import HTMLResponse
 
 from nebula_lighthouse_service import snap_config, nebula_config
-from nebula_lighthouse_service.nebula_config import SNAP
+from nebula_lighthouse_service.nebula_config import NEBULA_PATH, IS_SNAP
 
 app = FastAPI()
 
@@ -73,7 +73,7 @@ async def startup():
             continue
         log.info('starting nebula', path, port)
 
-        cmd = [f'{SNAP}/bin/nebula', '-config', path]
+        cmd = [f'{NEBULA_PATH}/nebula', '-config', path]
         proc = await asyncio.create_subprocess_exec(*cmd)
 
         lighthouse = Lighthouse(ca_crt=ca_crt, host_crt=host_crt, host_key=host_key)
@@ -106,7 +106,7 @@ async def start_nebula(lighthouse: Lighthouse) -> Tuple[int, asyncio.subprocess.
     path = nebula_config.get_config_path(port)
     path.write_text(config)
 
-    cmd = [f'{SNAP}/bin/nebula', '-config', path]
+    cmd = [f'{NEBULA_PATH}/nebula', '-config', path]
     proc = await asyncio.create_subprocess_exec(*cmd)
     return port, proc
 
@@ -156,7 +156,10 @@ async def lighthouse_status(ca_crt: bytes = File(...),
 
 
 def main():
-    port = snap_config.get_webserver_port()
+    if IS_SNAP:
+        port = snap_config.get_webserver_port()
+    else:
+        port = 8080
     uvicorn.run(app, host="0.0.0.0", port=port)
 
 

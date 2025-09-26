@@ -12,7 +12,7 @@ import uvicorn as uvicorn
 from fastapi import FastAPI, File
 from starlette.responses import HTMLResponse
 
-from nebula_lighthouse_service import snap_config, nebula_config
+from nebula_lighthouse_service import snap_config, nebula_config, web_config
 from nebula_lighthouse_service.nebula_config import NEBULA_PATH, IS_SNAP
 
 app = FastAPI()
@@ -95,7 +95,10 @@ async def index():
 
 
 async def start_nebula(lighthouse: Lighthouse) -> Tuple[int, asyncio.subprocess.Process]:
-    min_port, max_port = snap_config.get_ports()
+    if IS_SNAP:
+        min_port, max_port = snap_config.get_ports()
+    else:
+        min_port, max_port = web_config.get_ports()
     port = min_port + len(list(nebula_config.get_existing_configs()))
     if port > max_port:
         raise ValueError('Too many nebula lighthouse services already running')
@@ -159,7 +162,8 @@ def main():
     if IS_SNAP:
         port = snap_config.get_webserver_port()
     else:
-        port = 8080
+        port = web_config.get_webserver_port()
+
     uvicorn.run(app, host="0.0.0.0", port=port)
 
 

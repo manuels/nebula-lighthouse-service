@@ -3,11 +3,16 @@ from typing import Iterator, Tuple
 
 import yaml
 import os
+import shutil
 from pathlib import Path
 
-SNAP = Path(os.environ['SNAP'])
-CONFIG_PATH = Path(os.environ['SNAP_COMMON']) / 'config'
-
+NEBULA_PATH = Path(shutil.which('nebula')).parent
+try:
+    CONFIG_PATH = Path(os.environ['SNAP_COMMON']) / 'config'
+    IS_SNAP = True
+except KeyError:
+    CONFIG_PATH = Path('/etc/nebula-lighthouse-service')
+    IS_SNAP = False
 
 def create_config(ca: str, cert: str, key: str, port: int) -> str:
     cfg = dict(
@@ -29,7 +34,7 @@ def create_config(ca: str, cert: str, key: str, port: int) -> str:
 
 
 def test_config(yaml_config: str):
-    subprocess.run(f'{SNAP}/bin/nebula -test -config /dev/stdin'.split(),
+    subprocess.run(f'{NEBULA_PATH}/nebula -test -config /dev/stdin'.split(),
                    check=True,
                    input=yaml_config.encode())
 

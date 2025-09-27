@@ -1,0 +1,3 @@
+min-port: 49152
+max-port: 65535
+webserver.port: 8080

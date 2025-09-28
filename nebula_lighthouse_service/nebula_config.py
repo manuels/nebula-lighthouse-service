@@ -58,5 +58,5 @@ def get_existing_configs() -> Iterator[Path]:
     return VAR_PATH.glob('lighthouse-*.yaml')
 
 
-def get_config_path(lighthouse_index: int) -> Path:
+def get_lighthouse_path(lighthouse_index: int) -> Path:
     return VAR_PATH / f'lighthouse-{int(lighthouse_index)}.yaml'

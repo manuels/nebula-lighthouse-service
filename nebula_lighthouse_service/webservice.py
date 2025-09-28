@@ -106,7 +106,7 @@ async def start_nebula(lighthouse: Lighthouse) -> Tuple[int, asyncio.subprocess.
     config = nebula_config.create_config(lighthouse.ca_crt, lighthouse.host_crt, lighthouse.host_key, port)
     nebula_config.test_config(config)
 
-    path = nebula_config.get_config_path(port)
+    path = nebula_config.get_lighthouse_path(port)
     path.write_text(config)
 
     cmd = [f'{NEBULA_PATH}/nebula', '-config', path]

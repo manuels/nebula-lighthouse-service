@@ -3,10 +3,10 @@ from setuptools import setup, find_packages
 setup(
     name='nebula_lighthouse_service',
     version='0.0.1',
-    url='https://github.com/mypackage.git',
-    author='Author Name',
-    author_email='author@gmail.com',
-    description='Description of my package',
+    url='https://github.com/manuels/nebula-lighthouse-service',
+    author='manuels',
+    maintainer='manuels bloominstrong',
+    description='This server is a public Nebula VPN Lighthouse Service. You can use it in case you don’t have a publicly accessible server to run your own Nebula Lighthouse.',
     packages=find_packages(),
     package_data=dict(nebula_lighthouse_service=["static/*.html"]),
     install_requires=[

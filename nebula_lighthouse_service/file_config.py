@@ -6,7 +6,7 @@ import pathlib
 
 def get_config(path, name, default):
     try:
-        contents = (path / 'config.yaml').read_text()
+        contents = (path).read_text()
         cfg = yaml.safe_load(contents)
         output = cfg[name]
     except:

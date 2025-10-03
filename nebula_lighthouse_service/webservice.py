@@ -5,6 +5,7 @@ import dataclasses
 import logging
 import re
 import os
+import argparse
 from typing import Tuple
 from pathlib import Path
 
@@ -35,7 +36,7 @@ class Web_config(dict):
 
     def __init__(
             self,
-            CONFIG_PATH = Path('/etc/nebula-lighthouse-service'),
+            CONFIG_PATH = Path('/etc/nebula-lighthouse-service/config.yaml'),
             LIGHTHOUSE_PATH = Path('/var/lib/nebula-lighthouse-service'),
             min_port = 49152,
             max_port = 65535,
@@ -58,7 +59,7 @@ class Web_config(dict):
             dict.__init__(
                 self,
                 IS_SNAP = False,
-                CONFIG_PATH = Path('/etc/nebula-lighthouse-service'),
+                CONFIG_PATH = Path('/etc/nebula-lighthouse-service/config.yaml'),
                 LIGHTHOUSE_PATH = Path('/var/lib/nebula-lighthouse-service'),
                 min_port = file_config.get_min_port(CONFIG_PATH),
                 max_port = file_config.get_max_port(CONFIG_PATH),
@@ -211,6 +212,27 @@ async def lighthouse_status(ca_crt: bytes = File(...),
 
 
 def main():
+    parser = argparse.ArgumentParser(prog='webservice')
+    parser.add_argument('--config', help='path of config file')
+    parser.add_argument('--lh-path', help='path for lighthouse files')
+    parser.add_argument('--min-port', help='min port for lighthouse')
+    parser.add_argument('--max-port', help='max port for lighthouse')
+    parser.add_argument('--web-port', help='web server port')
+    args = parser.parse_args()
+
+    for key, value in vars(args).items():
+        if value is not None:
+            if key == 'config':
+                web_config.__init__(CONFIG_PATH = Path(value))
+            elif key == 'lh_path':
+                web_config.set_lighthouse_path(Path(value))
+            elif key == 'min_port':
+                web_config.set_min_port(int(value))
+            elif key == 'max_port':
+                web_config.set_max_port(int(value))
+            elif key == 'web_port':
+                web_config.set_web_port(int(value))
+
     uvicorn.run(app, host="0.0.0.0", port=web_config['web_port'])
 
 

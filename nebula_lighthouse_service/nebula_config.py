@@ -9,9 +9,11 @@ from pathlib import Path
 NEBULA_PATH = Path(shutil.which('nebula')).parent
 try:
     CONFIG_PATH = Path(os.environ['SNAP_COMMON']) / 'config'
+    LIGHTHOUSE_PATH = CONFIG_PATH
     IS_SNAP = True
 except KeyError:
     CONFIG_PATH = Path('/etc/nebula-lighthouse-service')
+    LIGHTHOUSE_PATH = Path('/var/lib/nebula-lighthouse-service')
     IS_SNAP = False
 
 def create_config(ca: str, cert: str, key: str, port: int) -> str:
@@ -53,8 +55,8 @@ def read_config(path: Path) -> Tuple[str, str, str, int]:
 
 
 def get_existing_configs() -> Iterator[Path]:
-    return CONFIG_PATH.glob('lighthouse-*.yaml')
+    return LIGHTHOUSE_PATH.glob('lighthouse-*.yaml')
 
 
-def get_config_path(lighthouse_index: int) -> Path:
-    return CONFIG_PATH / f'lighthouse-{int(lighthouse_index)}.yaml'
+def get_lighthouse_path(lighthouse_index: int) -> Path:
+    return LIGHTHOUSE_PATH / f'lighthouse-{int(lighthouse_index)}.yaml'

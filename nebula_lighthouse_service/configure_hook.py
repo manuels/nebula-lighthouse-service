@@ -3,18 +3,17 @@
 from nebula_lighthouse_service import nebula_config
 from nebula_lighthouse_service import snap_config
 from nebula_lighthouse_service.snap_services import restart_webserver_service
-
+from nebula_lighthouse_service.webservice import web_config
 
 def main():
-    nebula_config.CONFIG_PATH.mkdir(exist_ok=True)
+    web_config['CONFIG_PATH'].mkdir(exist_ok=True)
 
-    webserver_port = snap_config.get_webserver_port()
-    snap_config.set_webserver_port(webserver_port)
+    web_config.set_web_port(web_config['web_port'])
+    web_config.set_web_ip(web_config['web_ip'])
     restart_webserver_service()
 
-    min_port, max_port = snap_config.get_ports()
-    snap_config.set_ports(min_port=min_port, max_port=max_port)
-
+    web_config.set_min_port(web_config['min_port'])
+    web_config.set_max_port(web_config['max_port'])
 
 if __name__ == '__main__':
     main()

@@ -41,6 +41,7 @@ class Web_config(dict):
             min_port = 49152,
             max_port = 65535,
             web_port = 8080,
+            web_ip = "0.0.0.0",
             IS_SNAP = False
     ):
         try:
@@ -53,6 +54,7 @@ class Web_config(dict):
                 min_port = snap_config.get_min_port(),
                 max_port = snap_config.get_max_port(),
                 web_port = snap_config.get_webserver_port(),
+                web_ip = snap_config.get_webserver_ip()
                 )
 
         except:
@@ -64,7 +66,8 @@ class Web_config(dict):
                 min_port = file_config.get_min_port(CONFIG_PATH),
                 max_port = file_config.get_max_port(CONFIG_PATH),
                 web_port = file_config.get_webserver_port(CONFIG_PATH),
-                )
+                web_ip = file_config.get_webserver_ip(CONFIG_PATH)
+            )
 
     def set_lighthouse_path(self, path):
         self['LIGHTHOUSE_PATH'] = path
@@ -83,6 +86,11 @@ class Web_config(dict):
         self['web_port'] = port
         if self['IS_SNAP']:
             snap_config.set_webserver_port(port)
+
+    def set_web_ip(self, address):
+        self['web_ip'] = address
+        if self['IS_SNAP']:
+            snap_config.set_webserver_ip(address)
 
 
 web_config = Web_config()
@@ -218,6 +226,7 @@ def main():
     parser.add_argument('--min-port', help='min port for lighthouse')
     parser.add_argument('--max-port', help='max port for lighthouse')
     parser.add_argument('--web-port', help='web server port')
+    parser.add_argument('--web-ip', help='web server ip address')
     args = parser.parse_args()
 
     for key, value in vars(args).items():
@@ -232,8 +241,10 @@ def main():
                 web_config.set_max_port(int(value))
             elif key == 'web_port':
                 web_config.set_web_port(int(value))
+            elif key == 'web_ip':
+                web_config.set_web_ip(str(value))
 
-    uvicorn.run(app, host="0.0.0.0", port=web_config['web_port'])
+    uvicorn.run(app, host=web_config['web_ip'], port=web_config['web_port'])
 
 
 if __name__ == "__main__":

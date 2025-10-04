@@ -30,12 +30,19 @@ def get_webserver_port():
     port = min(65535, max(1, int(get_config('webserver.port', 80))))
     return port
 
+def get_webserver_ip():
+    address = str(get_config('webserver.ip', "0.0.0.0"))
+    return address
 
 def set_webserver_port(port: int):
     subprocess.check_call(['snapctl', 'set',
                            f'webserver.port={int(port)}',
                            ])
 
+def set_webserver_ip(address: str):
+    subprocess.check_call(['snapctl', 'set',
+                           f'webserver.ip={str(address)}',
+                           ])
 
 def set_ports(min_port, max_port):
     subprocess.check_call(['snapctl', 'set',

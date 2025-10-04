@@ -9,6 +9,7 @@ def main():
     web_config['CONFIG_PATH'].mkdir(exist_ok=True)
 
     web_config.set_web_port(web_config['web_port'])
+    web_config.set_web_ip(web_config['web_ip'])
     restart_webserver_service()
 
     web_config.set_min_port(web_config['min_port'])

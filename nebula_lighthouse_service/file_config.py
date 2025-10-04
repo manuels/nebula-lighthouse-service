@@ -31,3 +31,6 @@ def get_webserver_port(path):
     port = min(65535, max(1, int(get_config(path, 'webserver.port', 8080))))
     return port
 
+def get_webserver_ip(path):
+    address = str(get_config(path, 'webserver.ip', "0.0.0.0"))
+    return address

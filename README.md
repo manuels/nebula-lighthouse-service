@@ -74,8 +74,9 @@ firewall:
       proto: tcp
       group: my_network  # <-- this blocks out the nebula lighthouse
 ```
+## Snap
 
-## How to run a public Lighthouse service?
+### How to run a public Lighthouse service?
 The public Nebula Lighthouse service is distributed [via snap](https://snapcraft.io/nebula-lighthouse-service). Snap allows for Nebula Lighthouse services to run in a strict confinement. 
 
 Install the service:
@@ -85,6 +86,7 @@ $ sudo snap install nebula-lighthouse-service
 Set public webserver port:
 ```
 $ sudo snap set nebula-lighthouse-service webserver.port=80
+$ sudo snap set nebula-lighthouse-service webserver.ip=0.0.0.0
 ```
 
 Set available port range for lighthouses (according to private port range in [RFC 6335](https://datatracker.ietf.org/doc/html/rfc6335#section-6)):
@@ -95,16 +97,49 @@ $ sudo snap set nebula-lighthouse-service max-port=65535
 
 You can add your server to the [list of public Nebula lighthouse services](https://github.com/manuels/nebula-lighthouse-service/blob/main/server-list.html) on Github.
 
-## Debugging the Service
-When you run a Nebula Lighthouse service, there is systemd service with the name `snap.nebula-lighthouse-service.webservice` running and for each served lighthouse a service with the name `snap.nebula-lighthouse-service.lighthouse-$i` (where `i` is an increasing number starting with `0`).
+### Debugging the Service
+When you run a Nebula Lighthouse service, there is systemd service with the name `snap.nebula-lighthouse-service.webservice` running. Each lighthouse service runs as a sub process.
 
-You can check if the services are running using
+You can check if the service is running using
 ```
 $ sudo systemctl status snap.nebula-lighthouse-service.webservice
-$ sudo systemctl status snap.nebula-lighthouse-service.lighthouse-0
 ```
-or check the complete logs using
+, check the complete logs using
 ```
-sudo journalctl -u snap.nebula-lighthouse-service.webservice
-sudo journalctl -u snap.nebula-lighthouse-service.lighthouse-0
+$ sudo journalctl -u snap.nebula-lighthouse-service.webservice
 ```
+or you can enter a shell inside the snap
+```
+$ sudo snap run --shell nebula-lighthouse-service.webservice
+```
+
+## Python package
+
+The public Nebula Lighthouse Service can be run outside of a snap with python virtual environment. Once packged the below will apply for running the service.
+
+Set up environment:
+```
+$ git clone https://github.com/manuels/nebula-lighthouse-service.git
+$ cd nebula-lighthouse-service
+$ python -m venv .
+$ source ./bin/activate
+$ pip install .
+```
+### Running the service
+```
+$ webservice -h
+usage: webservice [-h] [--config CONFIG] [--lh-path LH_PATH] [--min-port MIN_PORT]
+                  [--max-port MAX_PORT] [--web-port WEB_PORT] [--web-ip WEB_IP]
+
+options:
+  -h, --help           show this help message and exit
+  --config CONFIG      path of config file
+  --lh-path LH_PATH    path for lighthouse files
+  --min-port MIN_PORT  min port for lighthouse
+  --max-port MAX_PORT  max port for lighthouse
+  --web-port WEB_PORT  web server port
+  --web-ip WEB_IP      web server ip address
+```
+Default config is `/etc/nebula-lighthouse-service/config.yaml` and see the [example](./examples/config.yaml), default lighthouse file location is `/var/lib/nebula-lighthouse-service`.
+
+

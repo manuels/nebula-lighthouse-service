@@ -127,8 +127,8 @@ $ pip install .
 ```
 ### Running the service
 ```
-$ webservice -h
-usage: webservice [-h] [--config CONFIG] [--lh-path LH_PATH] [--min-port MIN_PORT]
+$ nebula-lighthouse-service -h
+usage: nebula-lighthouse-service [-h] [--config CONFIG] [--lh-path LH_PATH] [--min-port MIN_PORT]
                   [--max-port MAX_PORT] [--web-port WEB_PORT] [--web-ip WEB_IP]
 
 options:

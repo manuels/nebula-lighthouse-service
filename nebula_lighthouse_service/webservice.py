@@ -220,7 +220,7 @@ async def lighthouse_status(ca_crt: bytes = File(...),
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='webservice')
+    parser = argparse.ArgumentParser(prog='nebula-lighthouse-service')
     parser.add_argument('--config', help='path of config file')
     parser.add_argument('--lh-path', help='path for lighthouse files')
     parser.add_argument('--min-port', help='min port for lighthouse')

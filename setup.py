@@ -20,6 +20,6 @@ setup(
         './nebula_lighthouse_service/configure_hook.py',
     ],
     entry_points=dict(
-        console_scripts=['webservice = nebula_lighthouse_service.webservice:main'],
+        console_scripts=['nebula-lighthouse-service = nebula_lighthouse_service.webservice:main'],
     ),
 )

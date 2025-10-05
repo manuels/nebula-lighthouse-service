@@ -47,7 +47,7 @@ layout:
 
 apps:
   webservice:
-    command: bin/webservice
+    command: bin/nebula-lighthouse-service
     daemon: simple
     plugs:
       - network

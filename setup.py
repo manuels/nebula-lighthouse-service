@@ -7,6 +7,7 @@ setup(
     author='manuels',
     maintainer='manuels bloominstrong',
     description='This server is a public Nebula VPN Lighthouse Service. You can use it in case you don’t have a publicly accessible server to run your own Nebula Lighthouse.',
+    license = 'AGPL-3.0-or-later',
     packages=find_packages(),
     package_data=dict(nebula_lighthouse_service=["static/*.html"]),
     install_requires=[

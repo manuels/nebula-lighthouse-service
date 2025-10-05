@@ -18,20 +18,44 @@ def get_ports():
     max_port = min(65535, int(get_config('max-port', 65535)))
     return min_port, max_port
 
+def get_min_port():
+    min_port = max(1, int(get_config('min-port', 49152)))
+    return min_port
+
+def get_max_port():
+    max_port = min(65535, int(get_config('max-port', 65535)))
+    return max_port
 
 def get_webserver_port():
     port = min(65535, max(1, int(get_config('webserver.port', 80))))
     return port
 
+def get_webserver_ip():
+    address = str(get_config('webserver.ip', "0.0.0.0"))
+    return address
 
 def set_webserver_port(port: int):
     subprocess.check_call(['snapctl', 'set',
                            f'webserver.port={int(port)}',
                            ])
 
+def set_webserver_ip(address: str):
+    subprocess.check_call(['snapctl', 'set',
+                           f'webserver.ip={str(address)}',
+                           ])
 
 def set_ports(min_port, max_port):
     subprocess.check_call(['snapctl', 'set',
                            f'min-port={int(min_port)}',
+                           f'max-port={int(max_port)}'
+                           ])
+
+def set_min_port(min_port):
+    subprocess.check_call(['snapctl', 'set',
+                           f'min-port={int(min_port)}',
+                           ])
+
+def set_max_port(max_port):
+    subprocess.check_call(['snapctl', 'set',
                            f'max-port={int(max_port)}'
                            ])

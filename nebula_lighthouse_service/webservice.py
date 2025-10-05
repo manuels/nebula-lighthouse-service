@@ -17,6 +17,7 @@ from starlette.responses import HTMLResponse
 
 from nebula_lighthouse_service import snap_config, nebula_config, file_config
 from nebula_lighthouse_service.nebula_config import NEBULA_PATH
+from nebula_lighthouse_service.version import __version__
 
 app = FastAPI()
 
@@ -220,7 +221,7 @@ async def lighthouse_status(ca_crt: bytes = File(...),
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='nebula-lighthouse-service')
+    parser = argparse.ArgumentParser(prog= ' '.join(['nebula-lighthouse-service',__version__]) )
     parser.add_argument('--config', help='path of config file')
     parser.add_argument('--lh-path', help='path for lighthouse files')
     parser.add_argument('--min-port', help='min port for lighthouse')

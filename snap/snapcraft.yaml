@@ -1,5 +1,5 @@
 name: nebula-lighthouse-service
-version: v1.9.6
+version: v2.0.0
 
 summary: A scalable overlay networking tool.
 license: AGPL-3.0-or-later
@@ -31,7 +31,7 @@ parts:
   nebula:
     plugin: go
     source: https://github.com/slackhq/nebula.git
-    source-tag: $SNAPCRAFT_PROJECT_VERSION
+    source-tag: v1.9.6
     source-type: git
     build-packages:
       - gcc
@@ -47,7 +47,7 @@ layout:
 
 apps:
   webservice:
-    command: bin/webservice
+    command: bin/nebula-lighthouse-service
     daemon: simple
     plugs:
       - network

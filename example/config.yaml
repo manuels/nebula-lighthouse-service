@@ -1,3 +1,4 @@
 min-port: 49152
 max-port: 65535
 webserver.port: 8080
+webserver.ip: 0.0.0.0

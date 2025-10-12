@@ -31,7 +31,7 @@ parts:
   nebula:
     plugin: go
     source: https://github.com/slackhq/nebula.git
-    source-tag: v1.9.6
+    source-tag: v1.9.7
     source-type: git
     build-packages:
       - gcc

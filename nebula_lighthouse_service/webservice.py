@@ -28,7 +28,7 @@ RE_NEBULA = re.compile(r'^[ A-Za-z0-9+/\r\n-=]+$')
 
 
 def is_nebula_crt(crt: str) -> str:
-    if RE_NEBULA.match(crt) and crt.startswith('-----BEGIN NEBULA CERTIFICATE-----'):
+    if RE_NEBULA.match(crt) and crt.startswith('-----BEGIN NEBULA CERTIFICATE'):
         return crt
     else:
         raise ValueError('must be a valid NEBULA CERTIFICATE')
